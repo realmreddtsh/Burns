@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Burns — live rooms</title>
+    <meta name="description" content="Burns is a live chat room app: five rooms, real conversation, quiet dark design." />
+    <meta name="theme-color" content="#0b0b0f" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0b0f'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23c9a227' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+      <span class="grain"></span>
+    </div>
+
+    <!-- Name gate -->
+    <div class="gate" id="gate">
+      <form class="gate-card" id="gateForm" autocomplete="off">
+        <div class="gate-mark">✦</div>
+        <h1 class="gate-title">Burns</h1>
+        <p class="gate-sub">Five rooms, live conversation, no accounts. Choose the name people will see.</p>
+        <label class="field">
+          <span class="field-label">Display name</span>
+          <input
+            id="nameInput"
+            class="field-input"
+            type="text"
+            maxlength="24"
+            placeholder="e.g. Margot"
+            spellcheck="false"
+            required
+          />
+        </label>
+        <button class="gate-btn" type="submit">Enter the rooms</button>
+        <p class="gate-foot" id="gateFoot">You can change your name at any time.</p>
+      </form>
+    </div>
+
+    <!-- App -->
+    <main class="app" id="app" aria-hidden="true">
+      <aside class="rail">
+        <header class="rail-head">
+          <div class="brand">
+            <span class="brand-mark">✦</span>
+            <span class="brand-name">Burns</span>
+          </div>
+          <p class="brand-sub">live rooms</p>
+        </header>
+
+        <nav class="rooms" id="roomList" aria-label="Chat rooms"></nav>
+
+        <footer class="rail-foot">
+          <button class="me" id="meBtn" type="button" title="Change display name">
+            <span class="avatar" id="meAvatar">?</span>
+            <span class="me-text">
+              <span class="me-name" id="meName">…</span>
+              <span class="me-hint">change name</span>
+            </span>
+          </button>
+        </footer>
+      </aside>
+
+      <section class="chat">
+        <header class="chat-head">
+          <button class="icon-btn only-mobile" id="menuBtn" type="button" aria-label="Show rooms">☰</button>
+          <div class="chat-title">
+            <h2 id="roomName">—</h2>
+            <p id="roomTopic">—</p>
+          </div>
+          <div class="chat-meta">
+            <span class="status" id="status"><i class="dot"></i><span id="statusText">connecting</span></span>
+            <button class="icon-btn only-mobile" id="peopleBtn" type="button" aria-label="Show people">☺</button>
+          </div>
+        </header>
+
+        <div class="stream" id="stream" role="log" aria-live="polite">
+          <div class="messages" id="messages"></div>
+        </div>
+
+        <div class="typing" id="typing" aria-live="polite">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span id="typingText"></span>
+        </div>
+
+        <form class="composer" id="composer" autocomplete="off">
+          <textarea
+            id="input"
+            class="composer-input"
+            rows="1"
+            maxlength="800"
+            placeholder="Write something…"
+          ></textarea>
+          <button class="send" id="send" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M3.5 12 20 4l-6 16-3.2-6.3L3.5 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <aside class="people" id="peoplePanel">
+        <h3 class="people-head">In the room <span class="pill" id="peopleCount">0</span></h3>
+        <ul class="people-list" id="peopleList"></ul>
+        <p class="people-note">Presence is live. Leaving a room removes you instantly.</p>
+      </aside>
+
+      <div class="scrim" id="scrim"></div>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
